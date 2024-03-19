@@ -1,0 +1,31 @@
+SplitBib
+
+set
+author
+
+let authorCount = {}; // author の出現回数をカウントするオブジェクト
+// author の出現回数をカウント
+if (authorCount[firstName] !== undefined) {
+    // すでに出現していたらカウントを +1
+    authorCount[firstName] += 1;
+} else {
+    // 初めて出現したらカウントを 1 に
+    authorCount[firstName] = 1;
+}
+
+// author が重複したら名前の後に出現回数分の数字を追加
+if (authorCount[firstName] > 1) {
+    // 名前 + 出現回数
+    firstName = firstName + authorCount[firstName];
+}
+
+
+
+
+// ❺ year={****}：４桁の数字のみ
+const year_4Digit_Regex = /^\d{4}$/;
+
+// ❻ year={(参照2024/02/18)}：文字列の中にある4桁の数字
+const fourDigitRegex = /\d{4}/g;
+
+const regex = /\b\d{4}\b/g;

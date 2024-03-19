@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JavaScript Textarea Auto Resize</title>
+    <style>
+      textarea {
+        border: 1px solid #ccc;
+        width: 100%;
+        box-sizing: border-box;
+        resize: none;
+        overflow-y: hidden;
+      }
+      /* ラジオボタン02 */
+input[type=radio] {
+    display: none;
+}
+.radio02 {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px 30px;
+    position: relative;
+    width: auto;
+}
+.radio02::before {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    content: '';
+    display: block;
+    height: 16px;
+    left: 5px;
+    margin-top: -8px;
+    position: absolute;
+    top: 50%;
+    width: 16px;
+}
+.radio02::after {
+    background: #00cccc;
+    border-radius: 50%;
+    content: '';
+    display: block;
+    height: 8px;
+    left: 10px;
+    margin-top: -3px;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    width: 8px;
+}
+input[type=radio]:checked + .radio02::before {
+    border-color: #666;
+}
+input[type=radio]:checked + .radio02::after {
+    opacity: 1;
+}
+
+    </style>
+  </head>
+  <body>
+    <div id="app">
+
+        <!--ラジオボタン02-->
+        <input type="radio" id="02-D" name="radio02" checked="checked">
+        <label for="02-D" class="radio02">パソコン</label>
+        <input type="radio" id="02-E" name="radio02">
+        <label for="02-E" class="radio02">スマホ</label>
+      <textarea id="tweetTextarea" style="height: 60px;"></textarea>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const tweetTextarea = document.getElementById("tweetTextarea");
+
+        // テキストエリアの高さを自動調整する関数
+        function resizeTextarea() {
+          tweetTextarea.style.height = "auto"; // 高さを自動に設定して一時的に解放する
+          tweetTextarea.style.height = tweetTextarea.scrollHeight + "px"; // スクロール高さをセット
+        }
+
+        // テキストエリアの入力時に高さを自動調整する
+        tweetTextarea.addEventListener("input", function () {
+          resizeTextarea(); // テキストエリアの高さを調整
+        });
+
+        // 初期状態でテキストエリアの高さを調整
+        resizeTextarea();
+      });
+    </script>
+  </body>
+</html>
